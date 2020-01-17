@@ -684,7 +684,7 @@ def train(args, dataset_train, rnn, output):
         time_all[epoch - 1] = time_end - time_start
         # test
         if epoch % args.epochs_test == 0 and epoch>=args.epochs_test_start:
-            for sample_time in range(1,4):
+            for sample_time in range(1,args.sample_time):
                 G_pred = []
                 while len(G_pred)<args.test_total_size:
                     if 'GraphRNN_VAE' in args.note:
@@ -696,6 +696,12 @@ def train(args, dataset_train, rnn, output):
                     G_pred.extend(G_pred_step)
                 # save graphs
                 fname = args.graph_save_path + args.fname_pred + str(epoch) +'_'+str(sample_time) + '.dat'
+                # EXPERIMENTAL
+                for graph in G_pred:
+                    A = nx.adjacency_matrix(graph)
+                    print(A.todense())
+                    print(A.todense().shape)
+                # /EXPERIMENTAL
                 save_graph_list(G_pred, fname)
                 if 'GraphRNN_RNN' in args.note:
                     break

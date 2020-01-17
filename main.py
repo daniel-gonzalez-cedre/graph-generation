@@ -138,3 +138,4 @@ if __name__ == '__main__':
     ### nll evaluation
     # train_nll(args, dataset_loader, dataset_loader, rnn, output, max_iter = 200, graph_validate_len=graph_validate_len,graph_test_len=graph_test_len)
 
+    utils.load_graph_list()
