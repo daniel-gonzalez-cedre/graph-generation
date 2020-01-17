@@ -1,3 +1,5 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 from train import *
 
 if __name__ == '__main__':
@@ -28,7 +30,7 @@ if __name__ == '__main__':
     configure("tensorboard/run"+time, flush_secs=5)
 
     graphs = create_graphs.create(args)
-    
+
     # split datasets
     random.seed(123)
     shuffle(graphs)
@@ -46,7 +48,6 @@ if __name__ == '__main__':
     # graphs_train = graphs[0:int(0.8 * graphs_len)]
     # graphs_validate = graphs[int(0.2 * graphs_len):int(0.4 * graphs_len)]
 
-
     graph_validate_len = 0
     for graph in graphs_validate:
         graph_validate_len += graph.number_of_nodes()
@@ -58,8 +59,6 @@ if __name__ == '__main__':
         graph_test_len += graph.number_of_nodes()
     graph_test_len /= len(graphs_test)
     print('graph_test_len', graph_test_len)
-
-
 
     args.max_num_node = max([graphs[i].number_of_nodes() for i in range(len(graphs))])
     max_num_edge = max([graphs[i].number_of_edges() for i in range(len(graphs))])
@@ -85,10 +84,10 @@ if __name__ == '__main__':
     #         # print('node',node)
     #         if np.random.rand()>p:
     #             graph.remove_node(node)
-        # for edge in list(graph.edges()):
-        #     # print('edge',edge)
-        #     if np.random.rand()>p:
-        #         graph.remove_edge(edge[0],edge[1])
+    #     for edge in list(graph.edges()):
+    #         # print('edge',edge)
+    #         if np.random.rand()>p:
+    #             graph.remove_edge(edge[0],edge[1])
 
 
     ### dataset initialization

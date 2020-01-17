@@ -5,7 +5,7 @@ class Args():
         ### if clean tensorboard
         self.clean_tensorboard = False
         ### Which CUDA GPU device is used for training
-        self.cuda = 1
+        self.cuda = 0
 
         ### Which GraphRNN model variant is used.
         # The simple version of Graph RNN
@@ -58,20 +58,20 @@ class Args():
 
         self.batch_size = 32 # normal: 32, and the rest should be changed accordingly
         self.test_batch_size = 32
-        self.test_total_size = 1000
+        self.test_total_size = 10 # how many tests to run, default 1000
         self.num_layers = 4
 
         ### training config
-        self.num_workers = 4 # num workers to load data, default 4
+        self.num_workers = 16 # num workers to load data, default 4
         self.batch_ratio = 32 # how many batches of samples per epoch, default 32, e.g., 1 epoch = 32 batches
-        self.epochs = 3000 # now one epoch means self.batch_ratio x batch_size
-        self.epochs_test_start = 100
-        self.epochs_test = 100
-        self.epochs_log = 100
-        self.epochs_save = 100
+        self.epochs = 30 # now one epoch means self.batch_ratio x batch_size, default 3000
+        self.epochs_test_start = 5 # default 100
+        self.epochs_test = 5 # default 100
+        self.epochs_log = 1 # how often to output training information, default 100
+        self.epochs_save = 5 # how often to save output graphs, default 100
 
         self.lr = 0.003
-        self.milestones = [400, 1000]
+        self.milestones = [15, 25] # default [400, 1000]
         self.lr_rate = 0.3
 
         self.sample_time = 2 # sample time in each time step, when validating
