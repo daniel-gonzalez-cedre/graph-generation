@@ -697,10 +697,10 @@ def train(args, dataset_train, rnn, output):
                 # save graphs
                 fname = args.graph_save_path + args.fname_pred + str(epoch) +'_'+str(sample_time) + '.dat'
                 # EXPERIMENTAL
-                for graph in G_pred:
-                    A = nx.adjacency_matrix(graph)
-                    print(A.todense())
-                    print(A.todense().shape)
+                #for graph in G_pred:
+                #    A = nx.adjacency_matrix(graph)
+                #    print(A.todense())
+                #    print(A.todense().shape)
                 # /EXPERIMENTAL
                 save_graph_list(G_pred, fname)
                 if 'GraphRNN_RNN' in args.note:

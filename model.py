@@ -5,6 +5,9 @@ import string
 import re
 import random
 
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
+
 import torch
 import torch.nn as nn
 from torch.autograd import Variable
