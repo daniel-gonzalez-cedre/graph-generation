@@ -74,6 +74,13 @@ def create(args):
             for j in range(10,20):
                 graphs.append(nx.grid_2d_graph(i,j))
         args.max_prev_node = 40
+        '''
+        graphs = []
+        for i in range(10,20):
+            for j in range(10,20):
+                graphs.append(nx.grid_2d_graph(20,20))
+        args.max_prev_node = 40
+        '''
     elif args.graph_type=='grid_small':
         graphs = []
         for i in range(2,5):

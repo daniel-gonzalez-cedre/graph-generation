@@ -696,7 +696,7 @@ def train(args, dataset_train, rnn, output):
                     G_pred.extend(G_pred_step)
                 # save graphs
                 fname = args.graph_save_path + args.fname_pred + str(epoch) +'_'+str(sample_time) + '.dat'
-                # EXPERIMENTAL
+                # EXPERIMENTAL: generation
                 #for graph in G_pred:
                 #    A = nx.adjacency_matrix(graph)
                 #    print(A.todense())

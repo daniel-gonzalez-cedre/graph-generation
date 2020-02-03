@@ -46,9 +46,7 @@ def fit(graphs):
     sample_strategy = torch.utils.data.sampler.WeightedRandomSampler([1.0 / len(dataset) for i in range(len(dataset))], num_samples=args.batch_size*args.batch_ratio, replacement=True)
     dataset_loader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size, num_workers=args.num_workers, sampler=sample_strategy)
 
-
     # initialize the model
-
     if 'GraphRNN_VAE_conditional' in args.note:
         rnn = GRU_plain(input_size=args.max_prev_node, embedding_size=args.embedding_size_rnn,
                         hidden_size=args.hidden_size_rnn, num_layers=args.num_layers,
@@ -70,19 +68,28 @@ def fit(graphs):
 
     train(args, dataset_loader, rnn, output)
 
-    # TODO
-    # return the actual learned model
-    # pass args.max_prev_node as an argument to the function
+    return args, dataset_loader, rnn, output
 
-    return 0
-
-def gen():
-    return 0
+def gen(args, rnn, output, gen_num=10):
+    G_pred = []
+    while len(G_pred) < gen_num:
+        G_pred_step = test_rnn_epoch(0, args, rnn, output, test_batch_size=16)
+        G_pred.extend(G_pred_step)
+    return G_pred
 
 def main():
     args = Args()
     graphs = create_graphs.create(args)
-    fit(graphs)
+    print('----------graphs made----------')
+
+    args, dataset_loader, rnn, output = fit(graphs)
+    print('==========model fit==========')
+
+    generated = gen(args, rnn, output, gen_num=10)
+    print('**********graphs generated**********')
+    print(generated)
+    print(len(generated))
+
     return 0
 
 main()
